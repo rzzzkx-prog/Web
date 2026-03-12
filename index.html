@@ -1,37 +1,55 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galeri Otomatis</title>
     <style>
-        body { font-family: sans-serif; background: #111; color: white; text-align: center; padding: 20px; }
+        body { font-family: sans-serif; background: #111; color: white; text-align: center; padding: 20px; margin: 0; }
+        h1 { color: #00d4ff; margin-bottom: 30px; }
         .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .card { width: 300px; background: #222; border-radius: 10px; overflow: hidden; text-decoration: none; color: white; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); border: 1px solid #00d4ff; }
-        .thumbnail { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
-        .card p { padding: 10px; font-weight: bold; }
+        .card { width: 300px; background: #222; border-radius: 12px; overflow: hidden; text-decoration: none; color: white; transition: 0.3s; border: 1px solid #333; }
+        .card:hover { transform: translateY(-8px); border-color: #00d4ff; box-shadow: 0 10px 20px rgba(0,212,255,0.2); }
+        .thumbnail-container { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #000; }
+        .thumbnail { width: 100%; height: 100%; object-fit: cover; }
+        .card p { padding: 15px; margin: 0; font-weight: bold; }
     </style>
 </head>
 <body>
+
     <h1>🎬 Galeri Video</h1>
+    
     <div id="gallery-container" class="gallery">
         </div>
 
     <script>
-        // Mengambil data dari file data.json
-        fetch('data.json')
-            .then(response => response.json())
+        // Memanggil data dari file data.json
+        fetch('./data.json')
+            .then(response => {
+                if (!response.ok) throw new Error('Gagal memuat data.json');
+                return response.json();
+            })
             .then(data => {
                 const container = document.getElementById('gallery-container');
+                container.innerHTML = ''; // Bersihkan loading text
+                
                 data.forEach(item => {
                     const html = `
                         <a href="nonton.html?video=${item.video}" class="card">
-                            <img src="${item.foto}" class="thumbnail">
+                            <div class="thumbnail-container">
+                                <img src="${item.foto}" class="thumbnail" onerror="this.src='https://placehold.co/600x400?text=Foto+Tidak+Ada'">
+                            </div>
                             <p>${item.judul}</p>
                         </a>
                     `;
                     container.innerHTML += html;
                 });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('gallery-container').innerHTML = '<p>Gagal memuat video. Pastikan data.json sudah benar.</p>';
             });
     </script>
+
 </body>
 </html>
