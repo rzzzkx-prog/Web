@@ -1,21 +1,37 @@
-fetch('./data.json') // Tambahkan ./ di depan nama file
-    .then(response => {
-        if (!response.ok) throw new Error('File JSON tidak ditemukan');
-        return response.json();
-    })
-    .then(data => {
-        const container = document.getElementById('gallery-container');
-        container.innerHTML = ''; // Kosongkan dulu
-        data.forEach(item => {
-            const html = `
-                <a href="nonton.html?video=${item.video}" class="card">
-                    <div class="thumbnail-container">
-                        <img src="${item.foto}" class="thumbnail">
-                    </div>
-                    <p>${item.judul}</p>
-                </a>
-            `;
-            container.innerHTML += html;
-        });
-    })
-    .catch(err => console.error(err));
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Galeri Otomatis</title>
+    <style>
+        body { font-family: sans-serif; background: #111; color: white; text-align: center; padding: 20px; }
+        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .card { width: 300px; background: #222; border-radius: 10px; overflow: hidden; text-decoration: none; color: white; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); border: 1px solid #00d4ff; }
+        .thumbnail { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+        .card p { padding: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>🎬 Galeri Video</h1>
+    <div id="gallery-container" class="gallery">
+        </div>
+
+    <script>
+        // Mengambil data dari file data.json
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('gallery-container');
+                data.forEach(item => {
+                    const html = `
+                        <a href="nonton.html?video=${item.video}" class="card">
+                            <img src="${item.foto}" class="thumbnail">
+                            <p>${item.judul}</p>
+                        </a>
+                    `;
+                    container.innerHTML += html;
+                });
+            });
+    </script>
+</body>
+</html>
