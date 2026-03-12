@@ -1,0 +1,12 @@
+[
+    {
+        "judul": "Liburan Seru",
+        "foto": "img/foto1.jpg",
+        "video": "video1.mp4"
+    },
+    {
+        "judul": "Makan Besar",
+        "foto": "img/foto2.jpg",
+        "video": "video2.mp4"
+    }
+]

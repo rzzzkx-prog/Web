@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Pemutar Video</title>
+    <style>
+        body { font-family: sans-serif; background: #000; color: white; text-align: center; padding: 20px; }
+        video { max-width: 90%; border-radius: 10px; box-shadow: 0 0 20px rgba(0,212,255,0.5); }
+        .back-btn { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #00d4ff; color: black; text-decoration: none; border-radius: 5px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1 id="judulVideo">Memutar Video...</h1>
+    
+    <video id="myVideo" controls autoplay>
+        <source id="videoSource" src="" type="video/mp4">
+            Browser kamu tidak mendukung video.
+        </video>
+
+        <br>
+        <a href="index.html" class="back-btn">Kembali ke Galeri</a>
+
+        <script>
+        // Ambil nama video dari URL (misal: ?video=video1.mp4)
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoFile = urlParams.get('video');
+
+            if (videoFile) {
+                const video = document.getElementById('myVideo');
+                const source = document.getElementById('videoSource');
+                const judul = document.getElementById('judulVideo');
+
+            // Ganti sumber video secara otomatis
+                source.src = "video/" + videoFile;
+                judul.innerText = "Menonton: " + videoFile;
+                
+            video.load(); // Muat ulang video dengan file baru
+        }
+    </script>
+</body>
+</html>
