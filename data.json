@@ -1,12 +1,13 @@
 [
     {
         "judul": "Liburan Seru",
-        "foto": "img/foto1.jpg",
-        "video": "video1.mp4"
+        "foto": "img/foto1.jpeg",
+        "video": "chundai.mp4"
     },
     {
         "judul": "Makan Besar",
-        "foto": "img/foto2.jpg",
-        "video": "video2.mp4"
+        "foto": "img/foto2.jpeg",
+        "video": "chundai2.mp4"
     }
+
 ]
